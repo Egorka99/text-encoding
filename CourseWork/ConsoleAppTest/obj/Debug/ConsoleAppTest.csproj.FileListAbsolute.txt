@@ -1,0 +1,10 @@
+H:\2 курс\Мальков\CourseWork\ConsoleAppTest\bin\Debug\ConsoleAppTest.exe.config
+H:\2 курс\Мальков\CourseWork\ConsoleAppTest\bin\Debug\ConsoleAppTest.exe
+H:\2 курс\Мальков\CourseWork\ConsoleAppTest\bin\Debug\ConsoleAppTest.pdb
+H:\2 курс\Мальков\CourseWork\ConsoleAppTest\bin\Debug\ClassLibraryTextCoding.dll
+H:\2 курс\Мальков\CourseWork\ConsoleAppTest\bin\Debug\ClassLibraryTextCoding.pdb
+H:\2 курс\Мальков\CourseWork\ConsoleAppTest\obj\Debug\ConsoleAppTest.csprojAssemblyReference.cache
+H:\2 курс\Мальков\CourseWork\ConsoleAppTest\obj\Debug\ConsoleAppTest.csproj.CoreCompileInputs.cache
+H:\2 курс\Мальков\CourseWork\ConsoleAppTest\obj\Debug\ConsoleAppTest.csproj.CopyComplete
+H:\2 курс\Мальков\CourseWork\ConsoleAppTest\obj\Debug\ConsoleAppTest.exe
+H:\2 курс\Мальков\CourseWork\ConsoleAppTest\obj\Debug\ConsoleAppTest.pdb
