@@ -12,8 +12,8 @@ namespace ConsoleAppTest
     { 
         static void Main(string[] args)  
         {
-            string input = "abracadabra";
-
+            string input = "abacaba";
+             
             /* HuffmanTree huffmanTree = new HuffmanTree();
 
               // Build the Huffman tree
@@ -36,30 +36,46 @@ namespace ConsoleAppTest
 
               Console.ReadLine(); */
 
-            /* SourceProp source = new SourceProp(input);
+
+
+           /*  SourceProp source = new SourceProp(input);
 
              char [] m = source.GetSymbolsArray();
              int [] n = source.GetFreqArray();
              double [] p = source.GetProbalility(n);
+             Console.WriteLine("Длина массивов: " + source.GetArraysLength() );
 
-             for (int i = 0; i < n.Length; i++) 
-             {
-                 Console.WriteLine(m[i]);  
+            Array.Sort(p);
+            Array.Reverse(p); 
+
+            for (int i = 0; i < p.Length; i++) 
+             {  
+                 Console.WriteLine(p[i]);  
              }  */
 
-            Huffman huff = new Huffman();
 
-            double cb = huff.GetCountBites();
+              
+            ArithmeticCoding text = new ArithmeticCoding();
 
-            Console.WriteLine(cb);
+            
+
+             double code = text.Encode();  
              
-            //SourceProp txt = new SourceProp(input);
+              Console.WriteLine(code); 
 
-            //ArithmeticCoding SourceData = new ArithmeticCoding();
+              
 
-          // Console.WriteLine( SourceData.Encode() );
-             
+
+
+            /*  Huffman huff = new Huffman(); 
+
+              string code = huff.GetCode();
+
+              Console.WriteLine("0 11  101  1000  1001");
+              Console.WriteLine(code);*/
+
+
             Console.ReadKey();     
-        }     
-    }   
-}
+        }      
+    }    
+} 

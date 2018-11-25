@@ -4,3 +4,9 @@ H:\2 курс\Мальков\CourseWork\ClassLibraryTextCoding\obj\Debug\ClassLi
 H:\2 курс\Мальков\CourseWork\ClassLibraryTextCoding\obj\Debug\ClassLibraryTextCoding.csproj.CoreCompileInputs.cache
 H:\2 курс\Мальков\CourseWork\ClassLibraryTextCoding\obj\Debug\ClassLibraryTextCoding.dll
 H:\2 курс\Мальков\CourseWork\ClassLibraryTextCoding\obj\Debug\ClassLibraryTextCoding.pdb
+H:\2 курс\Мальков\text-encoding\CourseWork\ClassLibraryTextCoding\bin\Debug\ClassLibraryTextCoding.dll
+H:\2 курс\Мальков\text-encoding\CourseWork\ClassLibraryTextCoding\bin\Debug\ClassLibraryTextCoding.pdb
+H:\2 курс\Мальков\text-encoding\CourseWork\ClassLibraryTextCoding\obj\Debug\ClassLibraryTextCoding.csprojAssemblyReference.cache
+H:\2 курс\Мальков\text-encoding\CourseWork\ClassLibraryTextCoding\obj\Debug\ClassLibraryTextCoding.csproj.CoreCompileInputs.cache
+H:\2 курс\Мальков\text-encoding\CourseWork\ClassLibraryTextCoding\obj\Debug\ClassLibraryTextCoding.dll
+H:\2 курс\Мальков\text-encoding\CourseWork\ClassLibraryTextCoding\obj\Debug\ClassLibraryTextCoding.pdb
