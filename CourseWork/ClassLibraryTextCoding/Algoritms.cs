@@ -530,14 +530,14 @@ namespace ClassLibraryTextCoding
 
             List<Node> Orderednodes = nodes.OrderByDescending(node => node.SymProbability).ToList();
 
-            double l = 0; 
-             
+            double l = 0;  
+              
             for (int i = 0; i < m; i++)   
             { 
                 segment[i].left = l;
                 segment[i].right = l + Orderednodes[i].SymProbability;
                 segment[i].symb = Orderednodes[i].Sym;
-                l = segment[i].right;
+                l = segment[i].right; 
             } 
 
             for (int i = 0; i < n; i++)
@@ -551,9 +551,11 @@ namespace ClassLibraryTextCoding
                         textsegments[i].left = segment[j].left;
                         textsegments[i].right = segment[j].right;
                         textsegments[i].symb = segment[j].symb;
+
                     }
                 }
-            }   
+            }
+               
               
             return textsegments;  
         }     
@@ -561,10 +563,10 @@ namespace ClassLibraryTextCoding
         public double Encode()
         {  
             Segment[] segment = defineSegment();
-              
+               
             double left = 0;  
             double right = 1;     
-            for (int i = 0; i < n-1; i++)    
+            for (int i = 0; i < n; i++)    
             {    
                 char symb = text.SourceText[i];  
                 double newRight = left + (right - left) * segment[i].right;
@@ -573,7 +575,29 @@ namespace ClassLibraryTextCoding
                 right = newRight; 
             }  
             return (left + right) / 2; 
-        }         
+        }    
+        
+        public string Decode() 
+        {
+            Segment[] segment = defineSegment();
+
+            double code = Encode();
+
+            string s = ""; 
+            for (int i = 0; i < n-1; i++)
+            {
+                for (int j = 0; j < m-1; j++)
+                {
+                    if ( (code <= segment[j].left) & (code < segment[j].right) )
+                    {
+                        s += segment[j].symb; 
+                        code = (code - segment[j].left) / (segment[j].right - segment[j].left);
+                        break;
+                    }
+                } 
+            }
+            return s;  
+        }
     }
      
       

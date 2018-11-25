@@ -13,7 +13,7 @@ namespace ConsoleAppTest
         static void Main(string[] args)  
         {
             string input = "abacaba";
-             
+
             /* HuffmanTree huffmanTree = new HuffmanTree();
 
               // Build the Huffman tree
@@ -38,30 +38,37 @@ namespace ConsoleAppTest
 
 
 
-           /*  SourceProp source = new SourceProp(input);
+            /*  SourceProp source = new SourceProp(input);
 
-             char [] m = source.GetSymbolsArray();
-             int [] n = source.GetFreqArray();
-             double [] p = source.GetProbalility(n);
-             Console.WriteLine("Длина массивов: " + source.GetArraysLength() );
+              char [] m = source.GetSymbolsArray();
+              int [] n = source.GetFreqArray();
+              double [] p = source.GetProbalility(n);
+              Console.WriteLine("Длина массивов: " + source.GetArraysLength() );
 
-            Array.Sort(p);
-            Array.Reverse(p); 
+             Array.Sort(p);
+             Array.Reverse(p); 
 
-            for (int i = 0; i < p.Length; i++) 
-             {  
-                 Console.WriteLine(p[i]);  
-             }  */
+             for (int i = 0; i < p.Length; i++) 
+              {  
+                  Console.WriteLine(p[i]);  
+              }  */
 
-
-              
             ArithmeticCoding text = new ArithmeticCoding();
 
-            
-
-             double code = text.Encode();  
+            ArithmeticCoding.Segment[] segment = text.defineSegment();
              
+            for (int i = 0; i < segment.Length; i++) 
+            {
+                Console.WriteLine(segment[i].symb +" "+ segment[i].left +" ; "+ segment[i].right);
+            }
+
+            double code = text.Encode();
+
+            string txt = text.Decode();
+              
               Console.WriteLine(code); 
+             
+              Console.WriteLine(txt);
 
               
 
