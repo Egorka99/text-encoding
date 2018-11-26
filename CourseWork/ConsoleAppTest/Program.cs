@@ -53,36 +53,49 @@ namespace ConsoleAppTest
                   Console.WriteLine(p[i]);  
               }  */
 
+            // Arithmetic Coding test
+
             ArithmeticCoding text = new ArithmeticCoding();
 
-            ArithmeticCoding.Segment[] segment = text.defineSegment();
+               ArithmeticCoding.Segment[] segment = text.defineSegment();
+
+               for (int i = 0; i < segment.Length; i++) 
+               {
+                   Console.WriteLine(segment[i].symb +" "+ segment[i].left +" ; "+ segment[i].right);
+               }
+
+               double code = text.Encode();
+
+               string txt = text.Decode();
+
+                 Console.WriteLine(code); 
+
+                 Console.WriteLine(txt);
              
-            for (int i = 0; i < segment.Length; i++) 
+
+            //LZ coding test
+            LZCoding lz = new LZCoding();
+
+            List<LZCoding.Node> list = lz.EncodeLZ78();
+             
+            foreach (var item in list)
             {
-                Console.WriteLine(segment[i].symb +" "+ segment[i].left +" ; "+ segment[i].right);
+                Console.WriteLine("(" + item.next +";"+ item.pos + ")");
             }
 
-            double code = text.Encode();
+            string decode = lz.DecodeLZ78(list);
 
-            string txt = text.Decode();
-              
-              Console.WriteLine(code); 
+            Console.WriteLine(decode); 
              
-              Console.WriteLine(txt);
+             /* Huffman huff = new Huffman(); 
 
-              
-
-
-
-            /*  Huffman huff = new Huffman(); 
-
-              string code = huff.GetCode();
-
+               List<double> list = huff.GetTree();
+             
               Console.WriteLine("0 11  101  1000  1001");
-              Console.WriteLine(code);*/
+              //Console.WriteLine(code);*/ 
 
-
+             
             Console.ReadKey();     
-        }      
+        }       
     }    
 } 

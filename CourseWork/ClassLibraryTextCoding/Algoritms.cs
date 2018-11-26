@@ -381,8 +381,9 @@ namespace ClassLibraryTextCoding
             } 
         }
 
+
    
-        public string GetCode()
+        public double[] GetTree()
         { 
             int n = text.GetTextLength(); // заменить !!! text.TextLength 
 
@@ -456,33 +457,28 @@ namespace ClassLibraryTextCoding
             }
             Console.WriteLine("---------");
 
-            List<double> OrderedTreeList = TreeList.OrderByDescending(node => node).ToList() ; 
+            List<double> OrderedTreeList = TreeList.OrderByDescending(node => node).ToList() ;
 
-            double[] tree = OrderedTreeList.ToArray();     
-                
-            //Sort(tree);      
-             
-            for (int k = 0; k < tree.Length; k++) 
-            {
-                Console.WriteLine(tree[k]);
-            }
+             double[] tree = OrderedTreeList.ToArray();     
 
-            /*  for (int f = 0; f < freq.Length; f++)  
-            {
-                code += GetSymCode(tree, a[f]) + " ";
-            }  */
 
-             
-             return code;      
-        }        
+             for (int k = 0; k < tree.Length; k++) 
+             {
+                 Console.WriteLine(tree[k]);
+             }
+            
+             return tree;      
+        }    
+        
+        
       
-    } 
-
+    }  
+     
     public class ArithmeticCoding 
     {
-        private static SourceProp text = new SourceProp("abacaba"); 
+        private static SourceProp text = new SourceProp("abracadabra"); 
 
-         
+          
         private char[] letters = text.GetSymbolsArray(); 
         private static int[] frequency = text.GetFreqArray();
         private double[] probability = text.GetProbalility(frequency);
@@ -577,7 +573,7 @@ namespace ClassLibraryTextCoding
             return (left + right) / 2; 
         }    
         
-        public string Decode() 
+       /* public string Decode() 
         {
             Segment[] segment = defineSegment();
 
@@ -585,21 +581,109 @@ namespace ClassLibraryTextCoding
 
             string s = ""; 
             for (int i = 0; i < n-1; i++)
-            {
+            { 
                 for (int j = 0; j < m-1; j++)
                 {
-                    if ( (code <= segment[j].left) & (code < segment[j].right) )
+                    if ( (code >= segment[j].left) & (code < segment[j].right) )
                     {
                         s += segment[j].symb; 
                         code = (code - segment[j].left) / (segment[j].right - segment[j].left);
                         break;
                     }
-                } 
-            }
-            return s;  
+                }   
+            } 
+            return s;     
+        } */
+
+        public string Decode ()
+        {
+            Segment[] segment = defineSegment();
+
+            double code = Encode();
+
+            string s = "";
+
+            for (int i = 0; i < segment.Length; i++)
+            {
+                if ( (code >= segment[i].left) & (code < segment[i].right) )
+                {
+                    s += segment[i].symb;
+                    code = (code - segment[i].left) / (segment[i].right - segment[i].left);
+                }
+            } 
+            return s; 
         }
+    }  
+
+    public class LZCoding
+    {
+        SourceProp text = new SourceProp("abacababacabc");
+
+
+        public struct Node
+        { 
+            public int pos;
+            public char next;
+        }
+
+        public List<Node> EncodeLZ78 ()
+        {
+            string buffer = "";
+              
+            string s = text.SourceText;
+
+            Dictionary<string, int> dict = new Dictionary<string, int>();
+
+            List<Node> ans = new List<Node>();
+
+            for (int i = 0; i < s.Length; i++) 
+            {
+                if (dict.ContainsKey(buffer + s[i])) 
+                    buffer += s[i];
+                else
+                {
+                    int num = 0; //номер буфера в словаре
+                    foreach (KeyValuePair<string, int> p in dict)
+                    {
+                        if (p.Key == buffer) num = p.Value;
+                    }  
+                    ans.Add(new Node() { pos = num, next = s[i] });
+
+                    dict.Add(buffer + s[i], dict.Count + 1);
+
+                    buffer = "";  
+                } 
+            } 
+            return ans;
+
+        }      
+
+        public string DecodeLZ78 (List<Node> encoded)
+        {
+            List<string> dict = new List<string>();
+
+            string ans = "";
+
+            string word="";
+
+             
+            dict.Add(word);
+
+            foreach (var node in encoded)
+            {
+                word = dict[node.pos] + node.next;
+                ans += word;
+                dict.Add(word);
+            }
+            return ans;   
+        }
+         
+         
+ 
+
+
     }
-     
+      
       
     public class Algoritms 
     { 
