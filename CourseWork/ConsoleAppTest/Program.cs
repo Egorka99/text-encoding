@@ -44,16 +44,16 @@ namespace ConsoleAppTest
 
              
            
-            ArithmeticCoding text = new ArithmeticCoding("abracadabra");
+            ArithmeticCoding text = new ArithmeticCoding();
 
-            double code = text.Encode();
+            double code = text.Encode("abracadabra");
 
-            string txt = text.Decode(); 
+            string txt = text.Decode("abracadabra"); 
 
             Console.WriteLine(code);  
-             
+              
             Console.WriteLine(txt); 
-
+             
             Console.WriteLine("--------------");
 
             Console.WriteLine("LZ кодирование");

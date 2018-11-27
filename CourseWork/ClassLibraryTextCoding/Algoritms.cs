@@ -478,25 +478,17 @@ namespace ClassLibraryTextCoding
 
     public class ArithmeticCoding  
     {
-        private string src;  
-
-        public ArithmeticCoding(string src)
-        {
-            this.src = src;  
-        }  
-               
-        public static SourceProp text = new SourceProp("abracadabra");
              
-        private char[] letters = text.Symbols;   
-        private int[] frequency = text.Frequencies; 
-        private double[] probability = text.Probabilities;
-        private int m = text.ArraysLength; 
-        private int n = text.TextLength;     
+        //private char[] letters = text.Symbols;   
+        //private int[] frequency = text.Frequencies; 
+        //private double[] probability = text.Probabilities;
+        //private int m = text.ArraysLength; 
+        //private int n = text.TextLength;     
             
  
-        /// <summary>
+        /// <summary> 
         /// Структура "Символ" - "Его вероятность"  
-        /// </summary>
+        /// </summary> 
         public struct Node
         {
             public char Sym;
@@ -517,9 +509,9 @@ namespace ClassLibraryTextCoding
         /// Поиск отрезка для символа
         /// </summary>
         /// <returns></returns>
-        public Segment[] defineSegment()
+        public Segment[] defineSegment(string text, int m , int n, char[]letters ,double[] probability)
         {
-            Segment[] segment = new Segment[m]; 
+            Segment[] segment = new Segment[m];   
 
             List<Node> nodes = new List<Node>(); //список с вероятностями символов
 
@@ -547,9 +539,9 @@ namespace ClassLibraryTextCoding
 
             for (int i = 0; i < n; i++) //сегмент для каждого символа текста 
             {
-                char[] textchars = text.SourceText.ToCharArray();
+                char[] textchars = text.ToCharArray();
                  
-                for (int j = 0; j < m; j++)
+                for (int j = 0; j < m; j++) 
                 { 
                     if (segment[j].symb == textchars[i])
                     {
@@ -569,15 +561,22 @@ namespace ClassLibraryTextCoding
         /// Кодирование текста 
         /// </summary>
         /// <returns> Код - середина сегмента</returns>
-        public double Encode()
-        {  
-            Segment[] segment = defineSegment(); //массив сегментов
+        public double Encode(string text)
+        {
+             SourceProp txt = new SourceProp(text);
+
+             char[] letters = txt.Symbols; 
+             double[] probability = txt.Probabilities;
+             int m = txt.ArraysLength;   
+             int n = txt.TextLength;         
+
+            Segment[] segment = defineSegment(text , m, n,letters,probability); //массив сегментов
 
             double left = 0;  //левая граница отрезка
             double right = 1;  //правая
-            for (int i = 0; i < n; i++)    
+            for (int i = 0; i < n; i++)     
             {     
-                char symb = text.SourceText[i];  
+                char symb = text[i];  
                 double newRight = left + (right - left) * segment[i].right;
                 double newLeft = left + (right - left) * segment[i].left;
                 left = newLeft; 
@@ -588,13 +587,20 @@ namespace ClassLibraryTextCoding
        
         /// <summary>
         /// Декодирование текста 
-        /// </summary>
+        /// </summary>  
         /// <returns></returns>
-        public string Decode ()
+        public string Decode (string text)
         {
-            Segment[] segment = defineSegment(); //массив сегментов
+            SourceProp txt = new SourceProp(text);
 
-            double code = Encode(); //код текста 
+            char[] letters = txt.Symbols;
+            double[] probability = txt.Probabilities; 
+            int m = txt.ArraysLength;   
+            int n = txt.TextLength;  
+
+            Segment[] segment = defineSegment(text, m, n, letters, probability); //массив сегментов
+
+            double code = Encode(text); //код текста  
 
             string s = ""; //текст 
 
