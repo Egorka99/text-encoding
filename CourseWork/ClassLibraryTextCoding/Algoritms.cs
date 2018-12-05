@@ -1,172 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+using System.Linq; 
 using System.Collections; 
 
 namespace ClassLibraryTextCoding
 {
       
-    public class Node
-    {
-        public char Symbol { get; set; }
-        public int Frequency { get; set; }
-        public Node Right { get; set; }
-        public Node Left { get; set; }
-
-        public List<bool> Traverse(char symbol, List<bool> data)
-        {
-            
-            if (Right == null && Left == null) //если нет потомков 
-            {
-                if (symbol.Equals(Symbol)) 
-                { 
-                    return data;
-                }
-                else
-                { 
-                    return null;
-                }
-            }
-            else
-            {
-                List<bool> left = null;
-                List<bool> right = null;
-
-                if (Left != null)
-                {
-                    List<bool> leftPath = new List<bool>();
-                    leftPath.AddRange(data);
-                    leftPath.Add(false);
-
-                    left = Left.Traverse(symbol, leftPath);
-                }
-
-                if (Right != null)
-                {
-                    List<bool> rightPath = new List<bool>();
-                    rightPath.AddRange(data);
-                    rightPath.Add(true);
-                    right = Right.Traverse(symbol, rightPath);
-                }
-
-                if (left != null)
-                {
-                    return left;
-                }
-                else
-                {
-                    return right;
-                }
-            }
-        }
-    }
-
-    public class HuffmanTree
-    { 
-        private List<Node> nodes = new List<Node>();
-        public Node Root { get; set; }
-        public Dictionary<char, int> Frequencies = new Dictionary<char, int>();
-
-        public void Build(string source)
-        {
-            for (int i = 0; i < source.Length; i++) 
-            {
-                if (!Frequencies.ContainsKey(source[i]))
-                {
-                    Frequencies.Add(source[i], 0);
-                }
-
-                Frequencies[source[i]]++;
-            } 
-
-            foreach (KeyValuePair<char, int> symbol in Frequencies)
-            {
-                nodes.Add(new Node() { Symbol = symbol.Key, Frequency = symbol.Value });
-            }
-             
-            while (nodes.Count > 1)
-            {
-                List<Node> orderedNodes = nodes.OrderBy(node => node.Frequency).ToList();
-
-                if (orderedNodes.Count >= 2)
-                { 
-                    // Take first two items 
-                    List<Node> taken = orderedNodes.Take(2).ToList();
-
-                    // Create a parent node by combining the frequencies
-                    Node parent = new Node()
-                    {
-                        Symbol = '*',
-                        Frequency = taken[0].Frequency + taken[1].Frequency,
-                        Left = taken[0],
-                        Right = taken[1]
-                    };
-
-                    nodes.Remove(taken[0]);
-                    nodes.Remove(taken[1]);
-                    nodes.Add(parent); 
-                }
-
-                Root = nodes.FirstOrDefault();
-
-            }
-             
-        }      
-
-        public BitArray Encode(string source)
-        {
-            List<bool> encodedSource = new List<bool>();
-
-            for (int i = 0; i < source.Length; i++)
-            { 
-                List<bool> encodedSymbol = Root.Traverse(source[i], new List<bool>());
-                encodedSource.AddRange(encodedSymbol);
-            }
-
-            BitArray bits = new BitArray(encodedSource.ToArray());
-
-            return bits;
-        }
-
-        public string Decode(BitArray bits)
-        {
-            Node current = this.Root;
-            string decoded = "";
-
-            foreach (bool bit in bits)
-            {
-                if (bit)
-                {
-                    if (current.Right != null)
-                    {
-                        current = current.Right;
-                    }
-                }
-                else
-                {
-                    if (current.Left != null)
-                    {
-                        current = current.Left;
-                    }
-                }
-
-                if (IsLeaf(current))
-                {
-                    decoded += current.Symbol;
-                    current = this.Root;
-                }
-            }
-
-            return decoded;
-        }
-
-        public bool IsLeaf(Node node)
-        {
-            return (node.Left == null && node.Right == null);
-        }
-
-    }
 
     public class SourceProp 
     { 
@@ -190,8 +29,8 @@ namespace ClassLibraryTextCoding
         /// <summary>   
         /// Структура для символа 
         /// </summary> 
-        public struct Node
-        {
+        public struct Struct
+        { 
 
             public char Symbol { get; set; }
             public int Frequency { get; set; }
@@ -216,18 +55,22 @@ namespace ClassLibraryTextCoding
             return result; 
         }  
 
+        /// <summary>
+        /// Получить массив символов
+        /// </summary>
+        /// <returns></returns>
         private char[] GetSymbolsArray()
         {
             var dict = ToFrequencyDictionary(); 
               
-            List<Node> nodes = new List<Node>(); //лист для хранения символов и частот
+            List<Struct> nodes = new List<Struct>(); //лист для хранения символов и частот
  
             foreach (KeyValuePair<char, int> symbol in dict) //заполняем лист из словаря 
             {
-                nodes.Add(new Node() { Symbol = symbol.Key, Frequency = symbol.Value });
+                nodes.Add(new Struct() { Symbol = symbol.Key, Frequency = symbol.Value });
             }
 
-            List<Node> orderedNodes = nodes.OrderBy(node => node.Frequency).ToList(); 
+            List<Struct> orderedNodes = nodes.OrderBy(node => node.Frequency).ToList(); 
 
             char[] symbols = new char [dict.Count]; //нужный массив
 
@@ -240,18 +83,22 @@ namespace ClassLibraryTextCoding
                 
         }    
           
+        /// <summary>
+        /// Получить массив частот текста 
+        /// </summary>
+        /// <returns></returns>
         private int [] GetFreqArray() 
         {  
             var dict = ToFrequencyDictionary();
 
-            List<Node> nodes = new List<Node>(); //лист для хранения символов и частот
+            List<Struct> nodes = new List<Struct>(); //лист для хранения символов и частот
 
             foreach (KeyValuePair<char, int> symbol in dict) //заполняем лист из словаря 
             {
-                nodes.Add(new Node() { Symbol = symbol.Key, Frequency = symbol.Value });
+                nodes.Add(new Struct() { Symbol = symbol.Key, Frequency = symbol.Value });
             }
 
-            List<Node> orderedNodes = nodes.OrderBy(node => node.Frequency).ToList();  
+            List<Struct> orderedNodes = nodes.OrderBy(node => node.Frequency).ToList();  
 
             int[] symbols = new int[dict.Count]; //нужный массив
 
@@ -263,6 +110,11 @@ namespace ClassLibraryTextCoding
             return symbols;
         } 
 
+        /// <summary>
+        /// Сумма частот символов
+        /// </summary>
+        /// <param name="FreqArray"></param>
+        /// <returns></returns>
         private int GetSum(int[] FreqArray)
         { 
             int sum = 0;
@@ -273,6 +125,10 @@ namespace ClassLibraryTextCoding
             return sum; 
         }  
 
+        /// <summary>
+        /// Получить вероятности символов 
+        /// </summary>
+        /// <returns></returns>
         private double[] GetProbalility()
         {
             double[] probalility = new double[Frequencies.Length];
@@ -288,204 +144,9 @@ namespace ClassLibraryTextCoding
     }
 
 
-    /*public class Huffman
-    { 
-         
-        /// <summary>
-        ///  !!! Разобраться со структурой данных
-        /// </summary>
-
-        public static SourceProp text = new SourceProp("abracadabra");
-
-        public static char[] symbols = text.SourceText.ToCharArray();
-
-        public static int[] freq = text.Frequencies; //массив частот (потом заменить freq Length на text.ArraysLength)
-
-        int maxLength = 17;  //максимальная длина вводимого текста 
-
-        /// <summary> 
-        /// Количество бит необходимых для кодирования
-        /// </summary>
-        /// <returns></returns>
-        public double GetCountBites()
-        {
-            double[] a = new double[maxLength]; // массив частот с макс длиной , пустота заполняется бесконечностью
-
-           /// Заполняем массив частотами
-            for (int k = 0; k < freq.Length; k++)
-            {
-                a[k] = freq[k];
-            }
-           /// Заполняем пустоты бесконечностью
-            for (int k = freq.Length; k < maxLength; k++)
-            {
-                a[k] = double.PositiveInfinity;
-            }
-
-            double[] b = new double[maxLength];
-
-            int i = 0, j = 0;
-            double ans = 0;
-
-           // Заполняем второй массив
-            for (int k = 0; k < maxLength; k++)
-            {
-                b[k] = double.PositiveInfinity;
-            }
-
-            for (int k = 0; k < freq.Length - 1; k++)
-            {
-                if ((a[i] + a[i + 1] <= a[i] + b[j]) & (a[i] + a[i + 1] <= b[j] + b[j + 1]))
-                {
-                    b[k] = a[i] + a[i + 1];
-                    ans += b[k];
-                    i += 2;
-                    continue;
-                }
-                if ((a[i] + b[j] <= a[i] + a[i + 1]) & (a[i] + b[j] <= b[j] + b[j + 1]))
-                {
-                    b[k] = a[i] + b[j];
-                    ans += b[k];
-                    i++;
-                    j++;
-                    continue;
-                }
-                if ((b[j] + b[j + 1] <= a[i] + a[i + 1]) & (b[j] + b[j + 1] <= a[i] + b[j]))
-                {
-                    b[k] = b[j] + b[j + 1];
-                    ans += b[k];
-                    j += 2;
-                }
-            }
-
-            return ans;
-        }
-
-        /// <summary>
-        /// Сортировка массива    
-        /// </summary>
-        /// <param name = "Elements" ></ param >
-        private static void Sort(double[] Elements)
-        {
-            for (int i = 0; i < Elements.Length; i++)
-            {
-                for (int j = 0; j < Elements.Length - 1; j++)
-                {
-                    if (Elements[j] > Elements[j + 1])
-                    {
-                        double temp = Elements[j];
-                        Elements[j] = Elements[j + 1];
-                        Elements[j + 1] = temp;
-                    }
-                }
-            }
-        }
-
-
-
-        public double[] GetTree() 
-        {
-            int n = text.TextLength; // заменить !!! text.TextLength 
-
-            List<double> TreeList = new List<double>();
-
-            string code = "";
-
-            int maxLength = 17;
-
-            double[] a = new double[maxLength];  // массив частот с макс длиной , пустота заполняется бесконечностью
-
-           // Заполняем массив частотами
-            for (int k = 0; k < freq.Length; k++)
-            {
-                a[k] = freq[k];
-            }
-            //Заполняем пустоты бесконечностью
-            for (int k = freq.Length; k < maxLength; k++)
-            {
-                a[k] = double.PositiveInfinity;
-            }
-
-            double[] b = new double[maxLength];
-
-            int i = 0, j = 0; //указатели   
-
-           // Заполняем второй массив
-            for (int k = 0; k < maxLength; k++)
-            {
-                b[k] = double.PositiveInfinity;
-            }
-
-
-            for (int k = 0; k < freq.Length - 1; k++)
-            {
-                if ((a[i] + a[i + 1] <= a[i] + b[j]) & (a[i] + a[i + 1] <= b[j] + b[j + 1]))
-                {
-                    b[k] = a[i] + a[i + 1];
-                    i += 2;
-                    continue;
-                }
-                if ((a[i] + b[j] <= a[i] + a[i + 1]) & (a[i] + b[j] <= b[j] + b[j + 1]))
-                {
-                    b[k] = a[i] + b[j];
-                    i++;
-                    j++;
-                    continue;
-                }
-                if ((b[j] + b[j + 1] <= a[i] + a[i + 1]) & (b[j] + b[j + 1] <= a[i] + b[j]))
-                {
-                    b[k] = b[j] + b[j + 1];
-                    j += 2;
-                }
-            }
-
-            for (int it = 0; it < freq.Length; it++)
-            {
-                TreeList.Add(a[it]);
-            }
-
-            for (int k = 0; k < maxLength; k++)
-            {
-                if (b[k] != double.PositiveInfinity)
-                    TreeList.Add(b[k]);
-            }
-
-
-            for (int k = 0; k < b.Length; k++)
-            {
-                Console.WriteLine(b[k]);
-            }
-            Console.WriteLine("---------");
-
-            List<double> OrderedTreeList = TreeList.OrderByDescending(node => node).ToList();
-
-            double[] tree = OrderedTreeList.ToArray();
-
-
-            for (int k = 0; k < tree.Length; k++)
-            {
-                Console.WriteLine(tree[k]);
-            }
-
-            return tree;
-        }
-
-
-
-    }*/ 
-     
-
-
     public class ArithmeticCoding  
     {
-             
-        //private char[] letters = text.Symbols;   
-        //private int[] frequency = text.Frequencies; 
-        //private double[] probability = text.Probabilities;
-        //private int m = text.ArraysLength; 
-        //private int n = text.TextLength;     
-            
- 
+               
         /// <summary> 
         /// Структура "Символ" - "Его вероятность"  
         /// </summary> 
@@ -504,7 +165,7 @@ namespace ClassLibraryTextCoding
             public double right; 
             public char symb;
         }  
-
+         
         /// <summary>
         /// Поиск отрезка для символа
         /// </summary>
@@ -582,10 +243,10 @@ namespace ClassLibraryTextCoding
                 left = newLeft; 
                 right = newRight; 
             }  
-            return (left + right) / 2; 
+            return Math.Round( (left + right) / 2 , 6 ); 
         }     
        
-        /// <summary>
+        /// <summary> 
         /// Декодирование текста 
         /// </summary>  
         /// <returns></returns>
@@ -629,13 +290,13 @@ namespace ClassLibraryTextCoding
         /// <summary> 
         /// Структура "Позиция" - "Следующий символ"
         /// </summary>
-        public struct Node
-        { 
+        public struct Struct
+        {  
             public int pos;
             public char next;
         }
          
-        public List<Node> EncodeLZ78 ()
+        public List<Struct> EncodeLZ78 ()
         {
             string buffer = "";  //хранение в памяти 
               
@@ -643,7 +304,7 @@ namespace ClassLibraryTextCoding
 
             Dictionary<string, int> dict = new Dictionary<string, int>(); //Словарь "Слово" - "Позиция"
 
-            List<Node> ans = new List<Node>(); //код в виде {позиция в словаре,следующий символ}
+            List<Struct> ans = new List<Struct>(); //код в виде {позиция в словаре,следующий символ}
 
             for (int i = 0; i < s.Length; i++)  
             {
@@ -656,7 +317,7 @@ namespace ClassLibraryTextCoding
                     {
                         if (p.Key == buffer) num = p.Value;
                     }  
-                    ans.Add(new Node() { pos = num, next = s[i] }); //добавляем пару в ответ
+                    ans.Add(new Struct() { pos = num, next = s[i] }); //добавляем пару в ответ
 
                     dict.Add(buffer + s[i], dict.Count + 1); //добавляем слово в словарь
 
@@ -667,7 +328,7 @@ namespace ClassLibraryTextCoding
 
         }      
 
-        public string DecodeLZ78 (List<Node> encoded)
+        public string DecodeLZ78 (List<Struct> encoded)
         {
             List<string> dict = new List<string>(); // словарь, слово с номером 0 — пустая строка
 
@@ -686,7 +347,376 @@ namespace ClassLibraryTextCoding
             }
             return ans;   
         }
+         
+        public string ToString (List<Struct> encoded)
+        {
+            string code = "";
+
+            foreach (var item in encoded)
+            {
+               code += " {" + item.pos + "," + item.next + "}" ;
+            }
+             
+            return code;    
+        }       
+          
+    } 
+
+    public class Node
+    {
+        public char Symbol { get; set; } //символ
+        public int Frequency { get; set; } //частота
+        public Node Right { get; set; } // правая ветка
+        public Node Left { get; set; } // левая ветка
+
+        public List<bool> Traverse(char symbol, List<bool> data) //нахождение кода символа  
+        {
+            if (Right == null && Left == null)  
+            {
+                if (symbol.Equals(Symbol))
+                {  
+                    return data;
+                }
+                else
+                {
+                    return null; 
+                }
+            }
+            else
+            {
+                List<bool> left = null;
+                List<bool> right = null;
+
+                if (Left != null)
+                {
+                    List<bool> leftPath = new List<bool>();
+                    leftPath.AddRange(data);
+                    leftPath.Add(false);
+
+                    left = Left.Traverse(symbol, leftPath);
+                }
+
+                if (Right != null)
+                {
+                    List<bool> rightPath = new List<bool>();
+                    rightPath.AddRange(data);
+                    rightPath.Add(true);
+                    right = Right.Traverse(symbol, rightPath);
+                }
+                 
+                if (left != null)
+                {
+                    return left;
+                }
+                else
+                { 
+                    return right;
+                }
+            }
+        }
+    }
+
+    public class HuffmanTree 
+    {
+        private List<Node> nodes = new List<Node>(); //лист с структурой выше
+        public Node Root { get; set; } //корневой элемент
+        public Dictionary<char, int> Frequencies = new Dictionary<char, int>();  //словарь "Символ - частота"
+
+        public void Build(string source) //строим дерево
+        { 
+            for (int i = 0; i < source.Length; i++) //заполняем словарь частот 
+            {
+                if (!Frequencies.ContainsKey(source[i])) 
+                {
+                    Frequencies.Add(source[i], 0);
+                }
+
+                Frequencies[source[i]]++;
+            }
+
+            foreach (KeyValuePair<char, int> symbol in Frequencies) //заполнение листа из словаря
+            {
+                nodes.Add(new Node() { Symbol = symbol.Key, Frequency = symbol.Value });
+            }
+
+            while (nodes.Count > 1) 
+            {
+                List<Node> orderedNodes = nodes.OrderBy(node => node.Frequency).ToList(); //отсортированный лист по частотам
+
+                if (orderedNodes.Count >= 2)  
+                {
+
+                    List<Node> taken = orderedNodes.Take(2).ToList();  //берем два первых элемента с листа
+
+                    Node parent = new Node() // родительский узел, с суммой частот левого и правого элемента 
+                    {
+                        Symbol = '*', 
+                        Frequency = taken[0].Frequency + taken[1].Frequency,
+                        Left = taken[0],
+                        Right = taken[1]
+                    };
+
+                    nodes.Remove(taken[0]); //удаляем левый и правый элемент
+                    nodes.Remove(taken[1]);
+                    nodes.Add(parent); //добавляем родительский 
+                } 
+
+                Root = nodes.FirstOrDefault(); //делаем его корневым 
+
+            }
+
+        }
+          
+        public BitArray Encode(string source) 
+        { 
+            List<bool> encodedSource = new List<bool>(); 
+             
+            for (int i = 0; i < source.Length; i++) 
+            { 
+                List<bool> encodedSymbol = Root.Traverse(source[i], new List<bool>()); 
+                encodedSource.AddRange(encodedSymbol); 
+            } 
+             
+            BitArray bits = new BitArray(encodedSource.ToArray());  
+             
+            return bits;
+        }
+
+        public static string ToString(BitArray code)
+        {
+            string s = String.Empty;
+            foreach (bool bit in code)
+            {
+                s += ((bit ? 1 : 0) + "");
+            }
+
+            return s; 
+        }
+
+        public string Decode(BitArray bits)
+        {
+            Node current = Root;
+            string decoded = "";
+
+            foreach (bool bit in bits)
+            {
+                if (bit) 
+                {
+                    if (current.Right != null)
+                    {
+                        current = current.Right;
+                    }
+                }
+                else
+                {
+                    if (current.Left != null)
+                    {
+                        current = current.Left;
+                    }
+                }
+
+                if (IsLeaf(current))
+                {
+                    decoded += current.Symbol;
+                    current = this.Root;
+                }
+            }
+
+            return decoded;
+        } 
+
+        private bool IsLeaf(Node node)
+        {
+            return (node.Left == null && node.Right == null);
+        }
 
     }
-      
+
+    /*public class Huffman
+   { 
+
+       /// <summary>
+       ///  !!! Разобраться со структурой данных
+       /// </summary>
+
+       public static SourceProp text = new SourceProp("abracadabra");
+
+       public static char[] symbols = text.SourceText.ToCharArray();
+
+       public static int[] freq = text.Frequencies; //массив частот (потом заменить freq Length на text.ArraysLength)
+
+       int maxLength = 17;  //максимальная длина вводимого текста 
+
+       /// <summary> 
+       /// Количество бит необходимых для кодирования
+       /// </summary>
+       /// <returns></returns>
+       public double GetCountBites()
+       {
+           double[] a = new double[maxLength]; // массив частот с макс длиной , пустота заполняется бесконечностью
+
+          /// Заполняем массив частотами
+           for (int k = 0; k < freq.Length; k++)
+           {
+               a[k] = freq[k];
+           }
+          /// Заполняем пустоты бесконечностью
+           for (int k = freq.Length; k < maxLength; k++)
+           {
+               a[k] = double.PositiveInfinity;
+           }
+
+           double[] b = new double[maxLength];
+
+           int i = 0, j = 0;
+           double ans = 0;
+
+          // Заполняем второй массив
+           for (int k = 0; k < maxLength; k++)
+           {
+               b[k] = double.PositiveInfinity;
+           }
+
+           for (int k = 0; k < freq.Length - 1; k++)
+           {
+               if ((a[i] + a[i + 1] <= a[i] + b[j]) & (a[i] + a[i + 1] <= b[j] + b[j + 1]))
+               {
+                   b[k] = a[i] + a[i + 1];
+                   ans += b[k];
+                   i += 2;
+                   continue;
+               }
+               if ((a[i] + b[j] <= a[i] + a[i + 1]) & (a[i] + b[j] <= b[j] + b[j + 1]))
+               {
+                   b[k] = a[i] + b[j];
+                   ans += b[k];
+                   i++;
+                   j++;
+                   continue;
+               }
+               if ((b[j] + b[j + 1] <= a[i] + a[i + 1]) & (b[j] + b[j + 1] <= a[i] + b[j]))
+               {
+                   b[k] = b[j] + b[j + 1];
+                   ans += b[k];
+                   j += 2;
+               }
+           }
+
+           return ans;
+       }
+
+       /// <summary>
+       /// Сортировка массива    
+       /// </summary>
+       /// <param name = "Elements" ></ param >
+       private static void Sort(double[] Elements)
+       {
+           for (int i = 0; i < Elements.Length; i++)
+           {
+               for (int j = 0; j < Elements.Length - 1; j++)
+               {
+                   if (Elements[j] > Elements[j + 1])
+                   {
+                       double temp = Elements[j];
+                       Elements[j] = Elements[j + 1];
+                       Elements[j + 1] = temp;
+                   }
+               }
+           }
+       }
+
+
+
+       public double[] GetTree() 
+       {
+           int n = text.TextLength; // заменить !!! text.TextLength 
+
+           List<double> TreeList = new List<double>();
+
+           string code = "";
+
+           int maxLength = 17;
+
+           double[] a = new double[maxLength];  // массив частот с макс длиной , пустота заполняется бесконечностью
+
+          // Заполняем массив частотами
+           for (int k = 0; k < freq.Length; k++)
+           {
+               a[k] = freq[k];
+           }
+           //Заполняем пустоты бесконечностью
+           for (int k = freq.Length; k < maxLength; k++)
+           {
+               a[k] = double.PositiveInfinity;
+           }
+
+           double[] b = new double[maxLength];
+
+           int i = 0, j = 0; //указатели   
+
+          // Заполняем второй массив
+           for (int k = 0; k < maxLength; k++)
+           {
+               b[k] = double.PositiveInfinity;
+           }
+
+
+           for (int k = 0; k < freq.Length - 1; k++)
+           {
+               if ((a[i] + a[i + 1] <= a[i] + b[j]) & (a[i] + a[i + 1] <= b[j] + b[j + 1]))
+               {
+                   b[k] = a[i] + a[i + 1];
+                   i += 2;
+                   continue;
+               }
+               if ((a[i] + b[j] <= a[i] + a[i + 1]) & (a[i] + b[j] <= b[j] + b[j + 1]))
+               {
+                   b[k] = a[i] + b[j];
+                   i++;
+                   j++;
+                   continue;
+               }
+               if ((b[j] + b[j + 1] <= a[i] + a[i + 1]) & (b[j] + b[j + 1] <= a[i] + b[j]))
+               {
+                   b[k] = b[j] + b[j + 1];
+                   j += 2;
+               }
+           }
+
+           for (int it = 0; it < freq.Length; it++)
+           {
+               TreeList.Add(a[it]);
+           }
+
+           for (int k = 0; k < maxLength; k++)
+           {
+               if (b[k] != double.PositiveInfinity)
+                   TreeList.Add(b[k]);
+           }
+
+
+           for (int k = 0; k < b.Length; k++)
+           {
+               Console.WriteLine(b[k]);
+           }
+           Console.WriteLine("---------");
+
+           List<double> OrderedTreeList = TreeList.OrderByDescending(node => node).ToList();
+
+           double[] tree = OrderedTreeList.ToArray();
+
+
+           for (int k = 0; k < tree.Length; k++)
+           {
+               Console.WriteLine(tree[k]);
+           }
+
+           return tree;
+       }
+
+
+
+   }*/
+
+
 }

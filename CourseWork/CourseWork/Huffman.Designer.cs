@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.labelError = new System.Windows.Forms.Label();
             this.buttonCodingHuff = new System.Windows.Forms.Button();
             this.label2 = new System.Windows.Forms.Label();
             this.textBoxCodingHuff_Code = new System.Windows.Forms.TextBox();
@@ -51,6 +52,7 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.labelError);
             this.groupBox1.Controls.Add(this.buttonCodingHuff);
             this.groupBox1.Controls.Add(this.label2);
             this.groupBox1.Controls.Add(this.textBoxCodingHuff_Code);
@@ -59,26 +61,37 @@
             this.groupBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.groupBox1.Location = new System.Drawing.Point(49, 104);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(319, 273);
+            this.groupBox1.Size = new System.Drawing.Size(365, 286);
             this.groupBox1.TabIndex = 1;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Кодирование";
             // 
+            // labelError
+            // 
+            this.labelError.AutoSize = true;
+            this.labelError.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.labelError.ForeColor = System.Drawing.Color.Red;
+            this.labelError.Location = new System.Drawing.Point(42, 120);
+            this.labelError.Name = "labelError";
+            this.labelError.Size = new System.Drawing.Size(0, 13);
+            this.labelError.TabIndex = 8;
+            // 
             // buttonCodingHuff
             // 
             this.buttonCodingHuff.BackColor = System.Drawing.SystemColors.ActiveCaption;
-            this.buttonCodingHuff.Location = new System.Drawing.Point(43, 222);
+            this.buttonCodingHuff.Location = new System.Drawing.Point(44, 241);
             this.buttonCodingHuff.Name = "buttonCodingHuff";
             this.buttonCodingHuff.Size = new System.Drawing.Size(128, 32);
             this.buttonCodingHuff.TabIndex = 7;
             this.buttonCodingHuff.Text = "Кодировать";
             this.buttonCodingHuff.UseVisualStyleBackColor = false;
+            this.buttonCodingHuff.Click += new System.EventHandler(this.buttonCodingHuff_Click);
             // 
             // label2
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label2.Location = new System.Drawing.Point(40, 136);
+            this.label2.Location = new System.Drawing.Point(41, 161);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(39, 20);
             this.label2.TabIndex = 6;
@@ -87,17 +100,17 @@
             // textBoxCodingHuff_Code
             // 
             this.textBoxCodingHuff_Code.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.textBoxCodingHuff_Code.Location = new System.Drawing.Point(43, 170);
+            this.textBoxCodingHuff_Code.Location = new System.Drawing.Point(44, 195);
             this.textBoxCodingHuff_Code.Name = "textBoxCodingHuff_Code";
             this.textBoxCodingHuff_Code.ReadOnly = true;
-            this.textBoxCodingHuff_Code.Size = new System.Drawing.Size(164, 26);
+            this.textBoxCodingHuff_Code.Size = new System.Drawing.Size(259, 26);
             this.textBoxCodingHuff_Code.TabIndex = 5;
             // 
             // label1
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label1.Location = new System.Drawing.Point(40, 48);
+            this.label1.Location = new System.Drawing.Point(41, 48);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(52, 20);
             this.label1.TabIndex = 4;
@@ -106,7 +119,7 @@
             // textBoxCodingHuff_Text
             // 
             this.textBoxCodingHuff_Text.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.textBoxCodingHuff_Text.Location = new System.Drawing.Point(43, 82);
+            this.textBoxCodingHuff_Text.Location = new System.Drawing.Point(44, 82);
             this.textBoxCodingHuff_Text.Name = "textBoxCodingHuff_Text";
             this.textBoxCodingHuff_Text.Size = new System.Drawing.Size(164, 26);
             this.textBoxCodingHuff_Text.TabIndex = 2;
@@ -119,9 +132,9 @@
             this.groupBox2.Controls.Add(this.label4);
             this.groupBox2.Controls.Add(this.textBoxDecodingHuff_Code);
             this.groupBox2.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.groupBox2.Location = new System.Drawing.Point(430, 104);
+            this.groupBox2.Location = new System.Drawing.Point(451, 104);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(319, 273);
+            this.groupBox2.Size = new System.Drawing.Size(421, 273);
             this.groupBox2.TabIndex = 2;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Декодирование";
@@ -135,6 +148,7 @@
             this.buttonDecodingHuff.TabIndex = 7;
             this.buttonDecodingHuff.Text = "Декодировать";
             this.buttonDecodingHuff.UseVisualStyleBackColor = false;
+            this.buttonDecodingHuff.Click += new System.EventHandler(this.buttonDecodingHuff_Click);
             // 
             // label3
             // 
@@ -170,7 +184,8 @@
             this.textBoxDecodingHuff_Code.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.textBoxDecodingHuff_Code.Location = new System.Drawing.Point(43, 82);
             this.textBoxDecodingHuff_Code.Name = "textBoxDecodingHuff_Code";
-            this.textBoxDecodingHuff_Code.Size = new System.Drawing.Size(164, 26);
+            this.textBoxDecodingHuff_Code.ReadOnly = true;
+            this.textBoxDecodingHuff_Code.Size = new System.Drawing.Size(355, 26);
             this.textBoxDecodingHuff_Code.TabIndex = 2;
             // 
             // label5
@@ -190,7 +205,7 @@
             this.lZ77ToolStrip});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(800, 24);
+            this.menuStrip1.Size = new System.Drawing.Size(898, 24);
             this.menuStrip1.TabIndex = 5;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -204,15 +219,15 @@
             // lZ77ToolStrip
             // 
             this.lZ77ToolStrip.Name = "lZ77ToolStrip";
-            this.lZ77ToolStrip.Size = new System.Drawing.Size(44, 20);
-            this.lZ77ToolStrip.Text = "LZ77";
+            this.lZ77ToolStrip.Size = new System.Drawing.Size(49, 20);
+            this.lZ77ToolStrip.Text = "LZ-78";
             this.lZ77ToolStrip.Click += new System.EventHandler(this.lZ77ToolStrip_Click);
             // 
             // Huffman
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 402);
+            this.ClientSize = new System.Drawing.Size(898, 402);
             this.Controls.Add(this.menuStrip1);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.groupBox2);
@@ -247,6 +262,7 @@
         private System.Windows.Forms.MenuStrip menuStrip1;
         private System.Windows.Forms.ToolStripMenuItem arithmeticToolStripMenu;
         private System.Windows.Forms.ToolStripMenuItem lZ77ToolStrip;
+        private System.Windows.Forms.Label labelError;
     }
 }
 

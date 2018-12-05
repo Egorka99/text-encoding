@@ -36,7 +36,8 @@
             this.label4 = new System.Windows.Forms.Label();
             this.textBoxDecodingArithm_Code = new System.Windows.Forms.TextBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.button1 = new System.Windows.Forms.Button();
+            this.labelError = new System.Windows.Forms.Label();
+            this.buttonEncodingArithm = new System.Windows.Forms.Button();
             this.label2 = new System.Windows.Forms.Label();
             this.textBoxCodingArithm_Code = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
@@ -87,6 +88,7 @@
             this.buttonDecodingArithm.TabIndex = 7;
             this.buttonDecodingArithm.Text = "Декодировать";
             this.buttonDecodingArithm.UseVisualStyleBackColor = false;
+            this.buttonDecodingArithm.Click += new System.EventHandler(this.buttonDecodingArithm_Click);
             // 
             // label3
             // 
@@ -122,12 +124,14 @@
             this.textBoxDecodingArithm_Code.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.textBoxDecodingArithm_Code.Location = new System.Drawing.Point(43, 82);
             this.textBoxDecodingArithm_Code.Name = "textBoxDecodingArithm_Code";
+            this.textBoxDecodingArithm_Code.ReadOnly = true;
             this.textBoxDecodingArithm_Code.Size = new System.Drawing.Size(164, 26);
             this.textBoxDecodingArithm_Code.TabIndex = 2;
             // 
             // groupBox1
             // 
-            this.groupBox1.Controls.Add(this.button1);
+            this.groupBox1.Controls.Add(this.labelError);
+            this.groupBox1.Controls.Add(this.buttonEncodingArithm);
             this.groupBox1.Controls.Add(this.label2);
             this.groupBox1.Controls.Add(this.textBoxCodingArithm_Code);
             this.groupBox1.Controls.Add(this.label1);
@@ -135,26 +139,37 @@
             this.groupBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.groupBox1.Location = new System.Drawing.Point(49, 141);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(319, 273);
+            this.groupBox1.Size = new System.Drawing.Size(319, 297);
             this.groupBox1.TabIndex = 5;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Кодирование";
             // 
-            // button1
+            // labelError
             // 
-            this.button1.BackColor = System.Drawing.SystemColors.ActiveCaption;
-            this.button1.Location = new System.Drawing.Point(43, 222);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(141, 32);
-            this.button1.TabIndex = 8;
-            this.button1.Text = "Кодировать";
-            this.button1.UseVisualStyleBackColor = false;
+            this.labelError.AutoSize = true;
+            this.labelError.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.labelError.ForeColor = System.Drawing.Color.Red;
+            this.labelError.Location = new System.Drawing.Point(44, 124);
+            this.labelError.Name = "labelError";
+            this.labelError.Size = new System.Drawing.Size(0, 13);
+            this.labelError.TabIndex = 9;
+            // 
+            // buttonEncodingArithm
+            // 
+            this.buttonEncodingArithm.BackColor = System.Drawing.SystemColors.ActiveCaption;
+            this.buttonEncodingArithm.Location = new System.Drawing.Point(43, 259);
+            this.buttonEncodingArithm.Name = "buttonEncodingArithm";
+            this.buttonEncodingArithm.Size = new System.Drawing.Size(141, 32);
+            this.buttonEncodingArithm.TabIndex = 8;
+            this.buttonEncodingArithm.Text = "Кодировать";
+            this.buttonEncodingArithm.UseVisualStyleBackColor = false;
+            this.buttonEncodingArithm.Click += new System.EventHandler(this.buttonEncodingArithm_Click);
             // 
             // label2
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label2.Location = new System.Drawing.Point(40, 136);
+            this.label2.Location = new System.Drawing.Point(40, 160);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(39, 20);
             this.label2.TabIndex = 6;
@@ -163,7 +178,7 @@
             // textBoxCodingArithm_Code
             // 
             this.textBoxCodingArithm_Code.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.textBoxCodingArithm_Code.Location = new System.Drawing.Point(43, 170);
+            this.textBoxCodingArithm_Code.Location = new System.Drawing.Point(43, 194);
             this.textBoxCodingArithm_Code.Name = "textBoxCodingArithm_Code";
             this.textBoxCodingArithm_Code.ReadOnly = true;
             this.textBoxCodingArithm_Code.Size = new System.Drawing.Size(164, 26);
@@ -221,7 +236,7 @@
             // 
             this.lZ77ToolStripMenuItem.Name = "lZ77ToolStripMenuItem";
             this.lZ77ToolStripMenuItem.Size = new System.Drawing.Size(49, 20);
-            this.lZ77ToolStripMenuItem.Text = "LZ-77";
+            this.lZ77ToolStripMenuItem.Text = "LZ-78";
             this.lZ77ToolStripMenuItem.Click += new System.EventHandler(this.lZ77ToolStripMenuItem_Click);
             // 
             // ArithmToHuffmanToolStripMenuItem
@@ -276,9 +291,10 @@
         private System.Windows.Forms.ToolStripMenuItem HuffmanToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem arithmeticToolStripMenu;
         private System.Windows.Forms.ToolStripMenuItem lZ77ToolStrip;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button buttonEncodingArithm;
         private System.Windows.Forms.ToolStripMenuItem lZ77ToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem ArithmToHuffmanToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem HuffToolStripMenuItem;
+        private System.Windows.Forms.Label labelError;
     }
 }
