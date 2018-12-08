@@ -71,6 +71,12 @@ namespace CourseWork
 
             textBoxDecodingArithm_Text.Text = txt;
         }
+
+        private void uTF8ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Hide();
+            new UTF_Form().Show();
+        }
     }  
-} 
+}  
  

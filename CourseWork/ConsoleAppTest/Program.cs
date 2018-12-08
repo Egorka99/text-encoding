@@ -2,16 +2,25 @@
 using System.Collections.Generic;
 using System.Collections;
 using ClassLibraryTextCoding;
-  
+using System.Text;
+
 namespace ConsoleAppTest
 { 
-    class Program
+    class Program 
     { 
-        static void Main(string[] args)  
+        static void Main(string[] args)   
         {
-            string input = "abracadabra";
+             string input = "abracadabra";
 
-             HuffmanTree huffmanTree = new HuffmanTree();  
+            byte[] bytes = Encoding.UTF8.GetBytes(input);
+
+            for (int i = 0; i < bytes.Length; i++)
+            {
+                Console.WriteLine(bytes[i]);
+            }
+           
+               
+            HuffmanTree huffmanTree = new HuffmanTree();  
 
               // Build the Huffman tree
               huffmanTree.Build(input);
@@ -41,15 +50,16 @@ namespace ConsoleAppTest
               
             ArithmeticCoding text = new ArithmeticCoding();
 
-            double code = text.Encode("abracadabra");
 
-            string txt = text.Decode("abracadabra"); 
+            double code = text.Encode("рыба phora");
 
-            Console.WriteLine(code);  
+            string txt = text.Decode("рыба phora");   
+
+            Console.WriteLine(code);    
               
-            Console.WriteLine(txt); 
+            Console.WriteLine(txt);   
              
-            Console.WriteLine("--------------");
+            Console.WriteLine("--------------"); 
 
             Console.WriteLine("LZ кодирование");
             Console.WriteLine( );

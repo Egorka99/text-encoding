@@ -5,10 +5,9 @@ using System.Collections;
 
 namespace ClassLibraryTextCoding
 {
-      
-
-    public class SourceProp 
-    { 
+ 
+    public class SourceProp
+    {
         public string SourceText { get; } //текст 
 
         public char[] Symbols { get { return GetSymbolsArray(); } } //алфавит текста 
@@ -18,10 +17,10 @@ namespace ClassLibraryTextCoding
         public double[] Probabilities { get { return GetProbalility(); } } //массив вероятностей  появления символов в тексте 
 
         public int TextLength { get { return SourceText.Length; } } //длина текста 
-              
+
         public int ArraysLength { get { return Symbols.Length; } } //длина массивов Symbols, Frequencies, Probabilities 
-         
-        public SourceProp(string source)  
+
+        public SourceProp(string source)
         {
             SourceText = source;
         }
@@ -30,7 +29,7 @@ namespace ClassLibraryTextCoding
         /// Структура для символа 
         /// </summary> 
         public struct Struct
-        { 
+        {
 
             public char Symbol { get; set; }
             public int Frequency { get; set; }
@@ -45,15 +44,15 @@ namespace ClassLibraryTextCoding
         {
             Dictionary<char, int> result = new Dictionary<char, int>();
 
-            foreach (char symbol in SourceText)  
+            foreach (char symbol in SourceText)
             {
                 if (result.ContainsKey(symbol))
                     result[symbol]++;
-                else 
+                else
                     result[symbol] = 1;
             }
-            return result; 
-        }  
+            return result;
+        }
 
         /// <summary>
         /// Получить массив символов
@@ -61,34 +60,6 @@ namespace ClassLibraryTextCoding
         /// <returns></returns>
         private char[] GetSymbolsArray()
         {
-            var dict = ToFrequencyDictionary(); 
-              
-            List<Struct> nodes = new List<Struct>(); //лист для хранения символов и частот
- 
-            foreach (KeyValuePair<char, int> symbol in dict) //заполняем лист из словаря 
-            {
-                nodes.Add(new Struct() { Symbol = symbol.Key, Frequency = symbol.Value });
-            }
-
-            List<Struct> orderedNodes = nodes.OrderBy(node => node.Frequency).ToList(); 
-
-            char[] symbols = new char [dict.Count]; //нужный массив
-
-            for (int i = 0; i < orderedNodes.Count; i++) //заполняем его с листа
-            {
-                symbols[i] = orderedNodes[i].Symbol;  
-            }
-
-            return symbols;    
-                
-        }    
-          
-        /// <summary>
-        /// Получить массив частот текста 
-        /// </summary>
-        /// <returns></returns>
-        private int [] GetFreqArray() 
-        {  
             var dict = ToFrequencyDictionary();
 
             List<Struct> nodes = new List<Struct>(); //лист для хранения символов и частот
@@ -98,17 +69,45 @@ namespace ClassLibraryTextCoding
                 nodes.Add(new Struct() { Symbol = symbol.Key, Frequency = symbol.Value });
             }
 
-            List<Struct> orderedNodes = nodes.OrderBy(node => node.Frequency).ToList();  
+            List<Struct> orderedNodes = nodes.OrderBy(node => node.Frequency).ToList();
+
+            char[] symbols = new char[dict.Count]; //нужный массив
+
+            for (int i = 0; i < orderedNodes.Count; i++) //заполняем его с листа
+            {
+                symbols[i] = orderedNodes[i].Symbol;
+            }
+
+            return symbols;
+
+        }
+
+        /// <summary>
+        /// Получить массив частот текста 
+        /// </summary>
+        /// <returns></returns>
+        private int[] GetFreqArray()
+        {
+            var dict = ToFrequencyDictionary();
+
+            List<Struct> nodes = new List<Struct>(); //лист для хранения символов и частот
+
+            foreach (KeyValuePair<char, int> symbol in dict) //заполняем лист из словаря 
+            {
+                nodes.Add(new Struct() { Symbol = symbol.Key, Frequency = symbol.Value });
+            }
+
+            List<Struct> orderedNodes = nodes.OrderBy(node => node.Frequency).ToList();
 
             int[] symbols = new int[dict.Count]; //нужный массив
 
             for (int i = 0; i < orderedNodes.Count; i++) //заполняем его с листа
             {
                 symbols[i] = orderedNodes[i].Frequency;
-            } 
-              
+            }
+
             return symbols;
-        } 
+        }
 
         /// <summary>
         /// Сумма частот символов
@@ -116,14 +115,14 @@ namespace ClassLibraryTextCoding
         /// <param name="FreqArray"></param>
         /// <returns></returns>
         private int GetSum(int[] FreqArray)
-        { 
+        {
             int sum = 0;
             for (int i = 0; i < FreqArray.Length; i++)
             {
                 sum += FreqArray[i];
             }
-            return sum; 
-        }  
+            return sum;
+        }
 
         /// <summary>
         /// Получить вероятности символов 
@@ -136,13 +135,28 @@ namespace ClassLibraryTextCoding
             for (int i = 0; i < Frequencies.Length; i++)
             {
                 probalility[i] = Convert.ToDouble(Frequencies[i]) / Convert.ToDouble(GetSum(Frequencies));
-            } 
-               
-            return probalility;      
-        }     
-     
-    }
+            }
 
+            return probalility;
+        }
+         
+        public int[] GetUtfCodes()
+        {
+            int[] UtfCodes = new int[SourceText.Length];
+             
+            int k = 0;
+            foreach (char ccc in SourceText)
+            {
+                UtfCodes[k] = ccc;
+                k++;
+            }     
+             
+            return UtfCodes;   
+
+        }        
+     
+    }  
+     
 
     public class ArithmeticCoding  
     {
@@ -150,12 +164,12 @@ namespace ClassLibraryTextCoding
         /// <summary> 
         /// Структура "Символ" - "Его вероятность"  
         /// </summary> 
-        public struct Node
+        public struct Struct
         {
             public char Sym;
             public double SymProbability;
         }
-
+         
         /// <summary>
         /// Отрезок для символа
         /// </summary>
@@ -164,7 +178,7 @@ namespace ClassLibraryTextCoding
             public double left; 
             public double right; 
             public char symb;
-        }  
+        }   
          
         /// <summary>
         /// Поиск отрезка для символа
@@ -174,19 +188,19 @@ namespace ClassLibraryTextCoding
         {
             Segment[] segment = new Segment[m];   
 
-            List<Node> nodes = new List<Node>(); //список с вероятностями символов
+            List<Struct> nodes = new List<Struct>(); //список с вероятностями символов
 
             Segment[] textsegments = new Segment[n]; //массив сегментов каждого символа текста 
 
             for (int i = 0; i < letters.Length; i++) //заполняем список из массивов символов и вероятностей
             {
-                Node node = new Node();
+                Struct node = new Struct();
                 node.Sym = letters[i];  
                 node.SymProbability = probability[i];
                 nodes.Add(node);
             }
 
-            List<Node> Orderednodes = nodes.OrderByDescending(node => node.SymProbability).ToList(); //сортируем список с вероятностями
+            List<Struct> Orderednodes = nodes.OrderByDescending(node => node.SymProbability).ToList(); //сортируем список с вероятностями
 
             double l = 0;  
               
@@ -211,14 +225,19 @@ namespace ClassLibraryTextCoding
                         textsegments[i].symb = segment[j].symb;
 
                     }
-                }
+                }  
             }
-               
+
+           /* for (int i = 0; i < textsegments.Length; i++)
+            {
+                Console.WriteLine( textsegments[i].symb + " - " + "{" + textsegments[i].left + ";" + textsegments[i].right + "}"); 
+            }*/
+                  
               
             return textsegments;  
         }     
            
-        /// <summary>
+        /// <summary> 
         /// Кодирование текста 
         /// </summary>
         /// <returns> Код - середина сегмента</returns>
@@ -242,8 +261,8 @@ namespace ClassLibraryTextCoding
                 double newLeft = left + (right - left) * segment[i].left;
                 left = newLeft; 
                 right = newRight; 
-            }  
-            return Math.Round( (left + right) / 2 , 6 ); 
+            }   
+            return  (left + right) / 2 ; 
         }     
        
         /// <summary> 

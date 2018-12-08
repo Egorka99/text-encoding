@@ -49,6 +49,7 @@
             this.lZ77ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.ArithmToHuffmanToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.HuffToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.uTF8ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.groupBox2.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.menuStrip1.SuspendLayout();
@@ -210,7 +211,8 @@
             this.lZ77ToolStrip,
             this.lZ77ToolStripMenuItem,
             this.ArithmToHuffmanToolStripMenuItem,
-            this.HuffToolStripMenuItem});
+            this.HuffToolStripMenuItem,
+            this.uTF8ToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.Size = new System.Drawing.Size(800, 24);
@@ -250,6 +252,13 @@
             this.HuffToolStripMenuItem.Size = new System.Drawing.Size(116, 20);
             this.HuffToolStripMenuItem.Text = "Метод Хаффмана";
             this.HuffToolStripMenuItem.Click += new System.EventHandler(this.HuffToolStripMenuItem_Click);
+            // 
+            // uTF8ToolStripMenuItem
+            // 
+            this.uTF8ToolStripMenuItem.Name = "uTF8ToolStripMenuItem";
+            this.uTF8ToolStripMenuItem.Size = new System.Drawing.Size(51, 20);
+            this.uTF8ToolStripMenuItem.Text = "UTF-8";
+            this.uTF8ToolStripMenuItem.Click += new System.EventHandler(this.uTF8ToolStripMenuItem_Click);
             // 
             // Arithmetic
             // 
@@ -296,5 +305,6 @@
         private System.Windows.Forms.ToolStripMenuItem ArithmToHuffmanToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem HuffToolStripMenuItem;
         private System.Windows.Forms.Label labelError;
+        private System.Windows.Forms.ToolStripMenuItem uTF8ToolStripMenuItem;
     }
 }

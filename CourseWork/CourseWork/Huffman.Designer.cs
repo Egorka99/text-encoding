@@ -45,6 +45,7 @@
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.arithmeticToolStripMenu = new System.Windows.Forms.ToolStripMenuItem();
             this.lZ77ToolStrip = new System.Windows.Forms.ToolStripMenuItem();
+            this.uTF8ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.menuStrip1.SuspendLayout();
@@ -202,7 +203,8 @@
             // 
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.arithmeticToolStripMenu,
-            this.lZ77ToolStrip});
+            this.lZ77ToolStrip,
+            this.uTF8ToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.Size = new System.Drawing.Size(898, 24);
@@ -222,6 +224,13 @@
             this.lZ77ToolStrip.Size = new System.Drawing.Size(49, 20);
             this.lZ77ToolStrip.Text = "LZ-78";
             this.lZ77ToolStrip.Click += new System.EventHandler(this.lZ77ToolStrip_Click);
+            // 
+            // uTF8ToolStripMenuItem
+            // 
+            this.uTF8ToolStripMenuItem.Name = "uTF8ToolStripMenuItem";
+            this.uTF8ToolStripMenuItem.Size = new System.Drawing.Size(51, 20);
+            this.uTF8ToolStripMenuItem.Text = "UTF-8";
+            this.uTF8ToolStripMenuItem.Click += new System.EventHandler(this.uTF8ToolStripMenuItem_Click);
             // 
             // Huffman
             // 
@@ -263,6 +272,7 @@
         private System.Windows.Forms.ToolStripMenuItem arithmeticToolStripMenu;
         private System.Windows.Forms.ToolStripMenuItem lZ77ToolStrip;
         private System.Windows.Forms.Label labelError;
+        private System.Windows.Forms.ToolStripMenuItem uTF8ToolStripMenuItem;
     }
 }
 

@@ -31,6 +31,7 @@
             this.label5 = new System.Windows.Forms.Label();
             this.buttonLZDecoding = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.labelError = new System.Windows.Forms.Label();
             this.textBoxDecodingLZ_Text = new System.Windows.Forms.TextBox();
             this.listBox = new System.Windows.Forms.ListBox();
             this.buttonLZCoding = new System.Windows.Forms.Button();
@@ -40,7 +41,7 @@
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.HuffmanToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.arithmeticToolStripMenu = new System.Windows.Forms.ToolStripMenuItem();
-            this.labelError = new System.Windows.Forms.Label();
+            this.uTF8ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.groupBox1.SuspendLayout();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
@@ -83,6 +84,16 @@
             this.groupBox1.TabIndex = 5;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Кодирование";
+            // 
+            // labelError
+            // 
+            this.labelError.AutoSize = true;
+            this.labelError.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.labelError.ForeColor = System.Drawing.Color.Red;
+            this.labelError.Location = new System.Drawing.Point(6, 251);
+            this.labelError.Name = "labelError";
+            this.labelError.Size = new System.Drawing.Size(0, 13);
+            this.labelError.TabIndex = 10;
             // 
             // textBoxDecodingLZ_Text
             // 
@@ -145,7 +156,8 @@
             // 
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.HuffmanToolStripMenuItem,
-            this.arithmeticToolStripMenu});
+            this.arithmeticToolStripMenu,
+            this.uTF8ToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.Size = new System.Drawing.Size(800, 24);
@@ -166,17 +178,14 @@
             this.arithmeticToolStripMenu.Text = "Арифметическое кодирование";
             this.arithmeticToolStripMenu.Click += new System.EventHandler(this.arithmeticToolStripMenu_Click);
             // 
-            // labelError
+            // uTF8ToolStripMenuItem
             // 
-            this.labelError.AutoSize = true;
-            this.labelError.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.labelError.ForeColor = System.Drawing.Color.Red;
-            this.labelError.Location = new System.Drawing.Point(6, 251);
-            this.labelError.Name = "labelError";
-            this.labelError.Size = new System.Drawing.Size(0, 13);
-            this.labelError.TabIndex = 10;
+            this.uTF8ToolStripMenuItem.Name = "uTF8ToolStripMenuItem";
+            this.uTF8ToolStripMenuItem.Size = new System.Drawing.Size(51, 20);
+            this.uTF8ToolStripMenuItem.Text = "UTF-8";
+            this.uTF8ToolStripMenuItem.Click += new System.EventHandler(this.uTF8ToolStripMenuItem_Click);
             // 
-            // LZ77
+            // LZ78
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -184,7 +193,7 @@
             this.Controls.Add(this.menuStrip1);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.groupBox1);
-            this.Name = "LZ77";
+            this.Name = "LZ78";
             this.Text = "Кодирование текста";
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
@@ -210,5 +219,6 @@
         private System.Windows.Forms.ListBox listBox;
         private System.Windows.Forms.TextBox textBoxDecodingLZ_Text;
         private System.Windows.Forms.Label labelError;
+        private System.Windows.Forms.ToolStripMenuItem uTF8ToolStripMenuItem;
     }
 }

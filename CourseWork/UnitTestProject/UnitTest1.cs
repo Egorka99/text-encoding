@@ -10,38 +10,64 @@ namespace UnitTestProject
     public class UnitTest1
     { 
         [TestMethod]
-        public void TestMethod1LZ78() 
+        public void TestMethod_EncodeLZ78() 
         {
             string input = "abacababacabc";
             string expected_output = " {0,a} {0,b} {1,c} {1,b} {4,a} {0,c} {4,c}";
 
               
-            LZCoding lz = new LZCoding(input);
+            LZCoding lz = new LZCoding(input); 
             List<LZCoding.Struct> list = lz.EncodeLZ78();
+            string output = lz.ToString(list);  
 
-            string output = lz.ToString(list); 
+            Assert.AreEqual(output, expected_output);
 
+        }
+
+
+        [TestMethod]
+        public void TestMethod_DecodeLZ78()
+        {
+            string input = "abacababacabc";
+            string expected_output = "abacababacabc";
+
+             
+            LZCoding lz = new LZCoding(input); 
+
+            var list = lz.EncodeLZ78(); 
+
+            string output = lz.DecodeLZ78(list); 
+             
             Assert.AreEqual(output, expected_output);
 
         }
 
         [TestMethod]
-        public void TestMethod1Arithm() 
+        public void TestMethod_EncodeArithm() 
         { 
             string input = "abacaba";
-            double expected_output = 0.411471;
-             
 
             ArithmeticCoding text = new ArithmeticCoding();
             double output = text.Encode(input); 
  
-            Assert.AreEqual(output, expected_output);
-
+            Assert.IsTrue( Math.Round(output,6) == 0.411471);
         }
 
+        [TestMethod]
+        public void TestMethod_DecodeArithm()
+        {
+            string input = "abacaba";
+            string expected_output = "abacaba";
+
+            ArithmeticCoding text = new ArithmeticCoding(); 
+            string output = text.Decode(input);
+
+            Assert.AreEqual(output, expected_output);
+        }
+         
 
         [TestMethod] 
-        public void TestMethodHuffman1() 
+        public void TestMethod_EncodeHuffman() 
         {
             string input = "abracadabra";
             string expected_output = "01101110100010101101110";     
@@ -55,25 +81,23 @@ namespace UnitTestProject
 
             Assert.AreEqual(output, expected_output); 
 
-        }
+        } 
+         
 
-        [TestMethod] 
-        public void TestMethodHuffman2() 
+        [TestMethod]
+        public void TestMethod_DecodeHuffman()
         {
-            string input = "случайный текст";
-            string expected_output = "00110001001101010110101100110101011100111111000001011";
-
-
+            string input = "случайный текст с пробелами ";
+            string expected_output = "случайный текст с пробелами ";
+    
             HuffmanTree huffmanTree = new HuffmanTree();
             huffmanTree.Build(input);
-            BitArray encoded = huffmanTree.Encode(input); 
-            string output = HuffmanTree.ToString(encoded);
-
-
+            BitArray encoded = huffmanTree.Encode(input);
+            string output = huffmanTree.Decode(encoded);  
+             
             Assert.AreEqual(output, expected_output);
 
         }
 
-
-    } 
+    }  
 }

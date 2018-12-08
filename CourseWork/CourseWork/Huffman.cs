@@ -92,5 +92,11 @@ namespace CourseWork
                 textBoxDecodingHuff_Text.Text = decoded; 
                    
         }
+
+        private void uTF8ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Hide();
+            new UTF_Form().Show();
+        }
     }  
-}
+} 
