@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Collections;
 using ClassLibraryTextCoding;
-using System.Text;
 
 namespace ConsoleAppTest
 { 
@@ -10,16 +9,8 @@ namespace ConsoleAppTest
     { 
         static void Main(string[] args)   
         {
-             string input = "abracadabra";
-
-            byte[] bytes = Encoding.UTF8.GetBytes(input);
-
-            for (int i = 0; i < bytes.Length; i++)
-            {
-                Console.WriteLine(bytes[i]);
-            }
-           
-               
+             string input = "abracadabra"; 
+                  
             HuffmanTree huffmanTree = new HuffmanTree();  
 
               // Build the Huffman tree
@@ -63,9 +54,9 @@ namespace ConsoleAppTest
 
             Console.WriteLine("LZ кодирование");
             Console.WriteLine( );
-             
-               
-            //LZ coding test 
+              
+                  
+            //LZ coding test      
             LZCoding lz = new LZCoding("abracadabra");
 
             List<LZCoding.Struct> list = lz.EncodeLZ78();

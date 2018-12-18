@@ -61,7 +61,7 @@ namespace UnitTestProject
 
             ArithmeticCoding text = new ArithmeticCoding(); 
             string output = text.Decode(input);
-
+             
             Assert.AreEqual(output, expected_output);
         }
          
