@@ -7,8 +7,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WinForm", "CourseWork\WinFo
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ClassLibraryTextCoding", "ClassLibraryTextCoding\ClassLibraryTextCoding.csproj", "{892E6535-1CA0-45E2-A9A8-103756844C7F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConsoleAppTest", "ConsoleAppTest\ConsoleAppTest.csproj", "{5870B982-A877-4EF4-9189-C6A9A04BAB7D}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UnitTestProject", "UnitTestProject\UnitTestProject.csproj", "{DA465529-FF71-454A-98A9-710305A719CD}"
 EndProject
 Global
@@ -25,10 +23,6 @@ Global
 		{892E6535-1CA0-45E2-A9A8-103756844C7F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{892E6535-1CA0-45E2-A9A8-103756844C7F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{892E6535-1CA0-45E2-A9A8-103756844C7F}.Release|Any CPU.Build.0 = Release|Any CPU
-		{5870B982-A877-4EF4-9189-C6A9A04BAB7D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{5870B982-A877-4EF4-9189-C6A9A04BAB7D}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{5870B982-A877-4EF4-9189-C6A9A04BAB7D}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{5870B982-A877-4EF4-9189-C6A9A04BAB7D}.Release|Any CPU.Build.0 = Release|Any CPU
 		{DA465529-FF71-454A-98A9-710305A719CD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{DA465529-FF71-454A-98A9-710305A719CD}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{DA465529-FF71-454A-98A9-710305A719CD}.Release|Any CPU.ActiveCfg = Release|Any CPU

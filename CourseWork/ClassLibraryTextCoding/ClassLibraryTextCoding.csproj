@@ -41,8 +41,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Algoritms.cs" />
+    <Compile Include="ArithmeticCoding.cs" />
+    <Compile Include="HuffmannCoding.cs" />
+    <Compile Include="LZCoding.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SourceProp.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="ClassDiagram1.cd" />
